@@ -1,0 +1,17 @@
+
+Promt Spec
+
+In the root of the folder, you'll find a spec file that addresses the following requirement: "Implement a reusable integration component or module that includes:
+- Timeouts, retries with exponential backoff and jitter, and a circuit breaker mechanism.
+- Centralized configuration, unified logging, and trace propagation (OpenTelemetry or similar).
+- Idempotency key support."
+
+Create a Node.js application following all the steps in the spec file.
+
+Iterations prompts
+
+Modify src/demo.ts so it simulates a flaky upstream service with configurable failure rates. The demo must clearly show retry behavior, circuit breaker state transitions (CLOSED → OPEN → HALF_OPEN → CLOSED), and timeout handling — with labeled console output for each scenario. All behavior should be observable by running npx ts-node src/demo.ts with no additional setup.
+
+The demo file is too large for one evaluator, and cases 2 and 4 are irrelevant to the test and can be reviewed in the other scenarios. For now, remove cases 2 and 4 and refactor the code to make it readable without affecting the functionality of the other scenarios.
+
+Refactor demo.ts for readability without changing behavior: (1) move startCapture, ScenarioRenderer, and UpstreamSimulator to the bottom of the file, after the scenarios and before main; (2) rename single-letter color constants to descriptive names (RESET, BOLD, DIM, RED, GREEN, YELLOW, CYAN); (3) replace UpstreamSimulator class with a makeUpstream(fn) factory that returns { call, stats }; (4) extract a makeClient(overrides) helper inside scenarioCombined that merges overrides into shared payment-service defaults to eliminate repeated config; (5) normalize section comment depth — all // ─── dividers at the same visual level throughout the file.

@@ -1,0 +1,36 @@
+TECHNICAL DECISION RECORD (BASE)
+
+CONTEXT
+
+- Project: Multi-country Digital Direct Channel.
+- Objective: Define governance and communication patterns for high availability and scalability.  
+
+
+DECISION 1: GOVERNANCE MODEL
+
+- Requirement: Compare centralized platform vs. decentralized team-owned integrations.
+- Options
+    1. Centralized.
+    2. Federated/Decentralized
+- Decision: Federated Team-Owned Integrations.
+- Reasoning: Local teams need autonomy to ensure rapid time-to-market in multiple countries, supported by a Center for Enablement (C4E) to provide reusable assets.
+
+DECISION 2: COMMUNICATION PATTERNS
+
+- Requirement: Compare event-driven vs. synchronous request-response for critical flows.
+- Options:
+    1. Synchronous.
+    2.Event-Driven Architecture.
+- Decision: Event-Driven Architecture (EDA) for critical persistence flows.
+- Reasoning: Decouples the frontend from Salesforce to guarantee transaction delivery even during core downtime, improving resilience in Insurtech operations.
+
+CONSEQUENCES (PROS & CONS)
+Pros (Consequences):
+- High resilience and availability for mission-critical processes. 
+- Faster local delivery cycles through team autonomy. 
+- Independent scaling of regional workloads.  
+
+Cons (Risks):
+- Increased complexity in distributed tracing.  
+- Requires transition to an eventual consistency model.  
+- Necessity for advanced observability (OpenTelemetry). 
